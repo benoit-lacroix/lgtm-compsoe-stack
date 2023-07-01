@@ -1,5 +1,5 @@
 server:
-  log_level: info
+  log_level: debug
 
 metrics:
   wal_directory: /etc/agent/data
