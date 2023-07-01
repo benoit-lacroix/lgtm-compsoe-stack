@@ -1,2 +1,3 @@
-# lgtm-compsoe-stack
-A bundle of configuration to run a LGTM Compose stack
+# LGTM Compose Stack
+
+A bundle of configuration to run a LGTM (Loki Grafana Tempo Mimir) Compose stack.

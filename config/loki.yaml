@@ -1,0 +1,36 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+common:
+  instance_addr: 127.0.0.1
+  path_prefix: /loki
+  replication_factor: 1
+  storage:
+    s3:
+      endpoint: minio-loki:9000
+      access_key_id: minio
+      secret_access_key: cabb8f0f-cbbf-40f0-8e07-e6273291423c
+      insecure: true
+      bucketnames: loki
+      s3forcepathstyle: true
+  ring:
+    kvstore:
+      store: memberlist
+
+schema_config:
+  configs:
+    - from: 2023-01-01
+      store: boltdb-shipper
+      object_store: s3
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+ruler:
+  alertmanager_url: http://localhost:9093
+
+analytics:
+  reporting_enabled: false
