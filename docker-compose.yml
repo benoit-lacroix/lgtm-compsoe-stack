@@ -84,7 +84,7 @@ services:
     hostname: test-promtail
     volumes:
       - ./config/promtail.yaml:/etc/promtail/config.yaml
-      - \\wsl.localhost\Ubuntu\run\docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     command: ["-config.file=/etc/promtail/config.yaml"]
     depends_on:
       - loki
