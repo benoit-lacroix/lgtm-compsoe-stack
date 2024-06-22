@@ -65,20 +65,8 @@ services:
     depends_on:
       - mimir
       - loki
-      - test-agent
-      - test-flog
 
-  test-agent:
-    image: grafana/agent:v0.34.2
-    container_name: lgtm-test-agent
-    hostname: test-agent
-    volumes:
-      - test-agent-data:/etc/agent/data
-      - ./config/agent.yaml:/etc/agent/agent.yaml
-    depends_on:
-      - mimir
-
-  test-promtail:
+  promtail:
     image: grafana/promtail:2.8.2
     container_name: lgtm-test-promtail
     hostname: test-promtail
@@ -88,13 +76,6 @@ services:
     command: ["-config.file=/etc/promtail/config.yaml"]
     depends_on:
       - loki
-
-  test-flog:
-    image: mingrammer/flog:0.4.3
-    container_name: lgtm-test-flog
-    command: -f apache_common -d 1s -l
-    depends_on:
-      - test-promtail
 
 volumes:
   minio-mimir-data:
@@ -108,7 +89,4 @@ volumes:
     external: false
   grafana-data:
     name: lgtm-grafana-data
-    external: false
-  test-agent-data:
-    name: lgtm-test-agent-data
     external: false
